@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Puneet Madhav — Behind the Booking</title>
+<meta name="description" content="A traveler sees the booking. I build what's behind it. Product builder, four years on the supply side of experiences." />
+<meta property="og:title" content="Puneet Madhav — Behind the Booking" />
+<meta property="og:description" content="The traveler sees the booking. I build what's behind it." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230A1230'/><circle cx='50' cy='54' r='26' fill='none' stroke='%23FF8A5B' stroke-width='6'/><path d='M50 6 L50 30' stroke='%2342D6CF' stroke-width='6' stroke-linecap='round'/></svg>" />
+</head>
+<body>
+
+<!-- ============ STATUS BAR + TRIP PROGRESS ============ -->
+<div class="statusbar" role="status" aria-live="polite">
+  <span class="status-dot"></span>
+  <span class="status-label" id="statusLabel">now boarding: departures — start here</span>
+  <span class="status-right">PNR · destination: MakeMyTrip — pending</span>
+</div>
+<div class="trip-progress"><span id="tripBar"></span></div>
+
+<!-- ============ NAV (boarding-pass segmented) ============ -->
+<header class="nav">
+  <a href="#overview" class="brand" aria-label="Behind the Booking — home">
+    <svg width="22" height="22" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="54" r="26" fill="none" stroke="currentColor" stroke-width="7"/><path d="M50 8 L50 32" stroke="var(--route)" stroke-width="7" stroke-linecap="round"/></svg>
+    <span>BEHIND THE BOOKING</span>
+  </a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  <nav class="nav-links" id="navLinks">
+    <a href="#overview" data-nav>Departures</a>
+    <a href="#route" data-nav>The Route</a>
+    <a href="#stays" data-nav>Stays</a>
+    <a href="#playbook" data-nav>Playbook</a>
+    <a href="#console" data-nav>Console</a>
+    <a href="#coldstart" data-nav class="nav-accent">Cold Start</a>
+    <a href="#notes" data-nav>Field Notes</a>
+    <a href="#contact" data-nav>Check-in</a>
+  </nav>
+</header>
+
+<main id="main">
+
+<!-- ==================== DEPARTURES (HERO) ==================== -->
+<section class="view view-sky" id="overview" aria-label="Departures">
+  <div class="sky-bg" aria-hidden="true">
+    <span class="cloud c1"></span><span class="cloud c2"></span><span class="cloud c3"></span>
+    <svg class="route-arc" viewBox="0 0 1200 400" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M-20 360 C 300 360, 420 80, 720 90 S 1180 60, 1240 30" fill="none" stroke="var(--route)" stroke-width="2" stroke-dasharray="3 9" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="wrap hero-wrap">
+    <div class="hero-copy">
+      <p class="kicker kicker-sky">Boarding for Hotels Connect · MakeMyTrip</p>
+      <h1 class="hero" id="heroLine">
+        <span class="hero-front">The traveler sees the booking.</span>
+        <span class="hero-back">I build what's behind it.</span>
+      </h1>
+      <p class="lede lede-sky">
+        Product builder, four years on the supply side of experiences - the funnels, models, and
+        systems that decide whether the front end works at all. Flip the pass. That's the job.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-flip" id="flipBtn" aria-pressed="false">↺ Flip the pass</button>
+        <a class="bag-tag" href="assets/Puneet-Madhav-Resume.pdf" target="_blank" rel="noopener">
+          <span class="bag-hole"></span>Resume · 1 pg
+        </a>
+      </div>
+    </div>
+
+    <!-- THE BOARDING PASS (flips to supply side) -->
+    <div class="pass-stage">
+      <button class="pass" id="pass" aria-label="Flip the boarding pass to see the supply side">
+        <div class="pass-inner">
+          <!-- FRONT: the booking the traveler sees -->
+          <div class="pass-face pass-front">
+            <div class="pass-head">
+              <span>SUPPLY SIDE AIRWAYS</span><span class="pass-class">PRODUCT · APM</span>
+            </div>
+            <div class="pass-route">
+              <div><span class="pass-code">BLD</span><span class="pass-city">Building models</span></div>
+              <div class="pass-plane">✈</div>
+              <div class="pass-to"><span class="pass-code">PRD</span><span class="pass-city">Building products</span></div>
+            </div>
+            <div class="pass-grid">
+              <div><span class="pg-k">Passenger</span><span class="pg-v">PUNEET MADHAV</span></div>
+              <div><span class="pg-k">Team</span><span class="pg-v">HOTELS CONNECT</span></div>
+              <div><span class="pg-k">Gate</span><span class="pg-v">NOW</span></div>
+              <div><span class="pg-k">Seat</span><span class="pg-v">SUPPLY-SIDE</span></div>
+            </div>
+            <div class="pass-bar" aria-hidden="true"></div>
+            <span class="pass-hint">tap to see what's behind it →</span>
+          </div>
+          <!-- BACK: the machinery behind it -->
+          <div class="pass-face pass-back">
+            <div class="pass-head pass-head-dark">
+              <span>MANIFEST · WHAT'S BEHIND THE BOOKING</span><span>v1 · real cargo</span>
+            </div>
+            <ul class="manifest">
+              <li><b>3×</b> daily active users in 3 months - a funnel, simplified</li>
+              <li><b>11.7%</b> lead-to-policy conversion · Rs 6.2 Mn+ APE</li>
+              <li><b>Rs 6 Mn/yr</b> saved on a build-vs-buy call</li>
+              <li><b>89%</b> support model, shipped 0->1 in 6 sprints</li>
+              <li><b>95%</b> faster reporting · a 4-person team led</li>
+            </ul>
+            <span class="pass-hint pass-hint-dark">← the part the traveler never sees</span>
+          </div>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <a class="scroll-cue" href="#route" aria-label="Begin the route">
+    <span>Begin the route</span><span class="cue-arrow">↓</span>
+  </a>
+</section>
+
+<!-- ==================== THE ROUTE (career map) ==================== -->
+<section class="view view-map" id="route" aria-label="The Route" hidden>
+  <div class="wrap">
+    <p class="kicker">The Route · how I got here</p>
+    <h2 class="page-h2">One journey, five stops, one destination pending.</h2>
+    <p class="section-intro">People read my CV as three careers. It's one trip - I keep flying toward the supply side. Tap a stop.</p>
+
+    <div class="map-stage">
+      <svg class="map-grid" aria-hidden="true"><defs><pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.2" fill="rgba(66,214,207,.18)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23dots)"/></svg>
+      <svg class="map-path" viewBox="0 0 1000 460" preserveAspectRatio="none" aria-hidden="true">
+        <path id="routeLine" d="M70 360 C 200 380, 230 180, 340 200 S 520 300, 560 180 S 720 120, 800 200 S 900 120, 940 80" fill="none" stroke="var(--route)" stroke-width="2.5" stroke-dasharray="4 8"/>
+        <circle class="route-plane" r="5" fill="var(--horizon)"><animateMotion dur="7s" repeatCount="indefinite"><mpath href="#routeLine"/></animateMotion></circle>
+      </svg>
+      <button class="pin" style="left:7%;top:78%"  data-stop="0"><span class="pin-dot"></span><span class="pin-label">Delhi · DTU</span></button>
+      <button class="pin" style="left:34%;top:43%" data-stop="1"><span class="pin-dot"></span><span class="pin-label">Gurugram · PolicyBazaar</span></button>
+      <button class="pin" style="left:56%;top:39%" data-stop="2"><span class="pin-dot"></span><span class="pin-label">Kozhikode · IIM-K</span></button>
+      <button class="pin" style="left:80%;top:44%" data-stop="3"><span class="pin-dot"></span><span class="pin-label">Crisil</span></button>
+      <button class="pin pin-next" style="left:94%;top:17%" data-stop="4"><span class="pin-dot"></span><span class="pin-label">Next stop</span></button>
+    </div>
+
+    <div class="stop-card" id="stopCard">
+      <!-- filled by JS; default shows first -->
+    </div>
+  </div>
+</section>
+
+<!-- ==================== STAYS (case studies as listings) ==================== -->
+<section class="view" id="stays" aria-label="Stays" hidden>
+  <div class="wrap">
+    <p class="kicker">Stays · the work, reviewed</p>
+    <h2 class="page-h2">Three places I built. Real guests, real reviews.</h2>
+    <div class="stay-filters">
+      <span class="filter-label">sort</span>
+      <button class="chip active" data-sort="impact">by impact</button>
+      <button class="chip" data-sort="recent">by recency</button>
+      <span class="filter-meta" id="stayMeta">3 properties · all verified</span>
+    </div>
+
+    <!-- Stay 01 -->
+    <article class="stay reveal" data-deploy data-impact="3" data-year="2023">
+      <button class="stay-head" aria-expanded="false">
+        <div class="stay-thumb st-01" aria-hidden="true"><span class="stay-verified">✓ verified</span></div>
+        <div class="stay-info">
+          <span class="stay-loc">Deployment 01 · PolicyBazaar</span>
+          <h3>The Activation Engine</h3>
+          <div class="stars" aria-label="impact rating 5 of 5">★★★★★ <span class="stars-n">flagship</span></div>
+          <p class="stay-blurb">A 0→1 AI product that turned abandoned insurance journeys into conversions. 6 sprints, 4-person team.</p>
+          <div class="amenities"><span>0→1</span><span>funnel surgery</span><span>build-vs-buy</span><span>LLM</span></div>
+        </div>
+        <div class="stay-price"><span class="price-k">outcome</span><span class="price-v">3× DAU</span><span class="price-cta">view stay →</span></div>
+      </button>
+      <div class="stay-body">
+        <div class="reviews">
+          <span class="reviews-h">guest reviews · what the numbers said</span>
+          <div class="review"><span class="r-stars">★★★★★</span><p>"Daily active users tripled in three months." <span class="r-by">— the funnel, after we stopped adding and started subtracting</span></p></div>
+          <div class="review"><span class="r-stars">★★★★★</span><p>"11.7% lead-to-policy conversion, ₹6.2 Mn+ APE in the first three quarters." <span class="r-by">— revenue per lead, which doubled</span></p></div>
+          <div class="review"><span class="r-stars">★★★★★</span><p>"Saved ₹6 Mn a year." <span class="r-by">— a build-vs-buy call that replaced the NLP vendor</span></p></div>
+        </div>
+        <div class="spine">
+          <div class="spine-row"><span class="spine-k">Situation</span><p>People came to buy health insurance and left halfway — not for lack of interest, but because the journey asked too much, too soon. A conversion problem dressed up as a traffic problem.</p></div>
+          <div class="spine-row"><span class="spine-k">The question</span><p><em>Where does intent actually die — and is it a model problem or a friction problem?</em> The two have opposite fixes.</p></div>
+          <div class="spine-row"><span class="spine-k">What I did</span><p>Four real personas from research. A north-star with input metrics underneath. Cut the quote-to-buy path down release by release. Made the build-vs-buy call. Shipped PolicyGPT at 89%.</p></div>
+          <div class="spine-row"><span class="spine-k">Tradeoff</span><p>Shipped a narrower assistant first. It converted — and a bot that converts beats one that delights and never sells.</p></div>
+          <div class="spine-row"><span class="spine-k">Taught</span><p>Friction is never where people guess. Subtract before you add. <a href="#playbook">→ Playbook</a></p></div>
+        </div>
+        <aside class="connect-note">
+          <span class="connect-mark">▸ Why this matters to a Connect property</span>
+          <p>Onboarding a hotel is a funnel too. A partner who signs but never lists live inventory hasn't churned — they've leaked at activation, exactly like a quote-starter before purchase. Same instinct, new domain. <a href="#coldstart">See Cold Start →</a></p>
+        </aside>
+      </div>
+    </article>
+
+    <!-- Stay 02 -->
+    <article class="stay reveal" data-deploy data-impact="2" data-year="2025">
+      <button class="stay-head" aria-expanded="false">
+        <div class="stay-thumb st-02" aria-hidden="true"><span class="stay-verified">✓ verified</span></div>
+        <div class="stay-info">
+          <span class="stay-loc">Deployment 02 · Crisil</span>
+          <h3>The QA Workflow Product</h3>
+          <div class="stars" aria-label="impact rating 4 of 5">★★★★☆ <span class="stars-n">internal platform</span></div>
+          <p class="stay-blurb">An internal B2B tool that replaced manual review across BFSI engagements — and earned adoption across teams.</p>
+          <div class="amenities"><span>0→1 tooling</span><span>adoption</span><span>workflow</span></div>
+        </div>
+        <div class="stay-price"><span class="price-k">outcome</span><span class="price-v">adopted</span><span class="price-cta">view stay →</span></div>
+      </button>
+      <div class="stay-body">
+        <div class="reviews">
+          <span class="reviews-h">guest reviews</span>
+          <div class="review"><span class="r-stars">★★★★★</span><p>"Cut review cycle time materially." <span class="r-by">— the engagements that used to do it by hand</span></p></div>
+          <div class="review"><span class="r-stars">★★★★☆</span><p>"Now used across multiple teams." <span class="r-by">— adoption, the only score that counts for internal tools</span></p></div>
+        </div>
+        <div class="spine">
+          <div class="spine-row"><span class="spine-k">Situation</span><p>Every BFSI engagement re-did quality review by hand — slow, inconsistent, invisible.</p></div>
+          <div class="spine-row"><span class="spine-k">The question</span><p>Training problem or tooling problem? It was tooling.</p></div>
+          <div class="spine-row"><span class="spine-k">What I did</span><p>Built and shipped the QA workflow product, then earned adoption beyond my own team — the harder, more telling part.</p></div>
+          <div class="spine-row"><span class="spine-k">Tradeoff</span><p>Built for the common 80% path; left edge cases manual, on purpose.</p></div>
+          <div class="spine-row"><span class="spine-k">Taught</span><p>Internal tools live or die on adoption, not features. <a href="#playbook">→ Playbook</a></p></div>
+        </div>
+        <aside class="connect-note">
+          <span class="connect-mark">▸ Why this matters to a Connect property</span>
+          <p>This <em>is</em> Connect work — building the workflow surface a partner-facing or ops team relies on, and judging success by whether people actually switch to it.</p>
+        </aside>
+      </div>
+    </article>
+
+    <!-- Stay 03 -->
+    <article class="stay reveal" data-deploy data-impact="1" data-year="2024">
+      <button class="stay-head" aria-expanded="false">
+        <div class="stay-thumb st-03" aria-hidden="true"><span class="stay-verified">✓ verified</span></div>
+        <div class="stay-info">
+          <span class="stay-loc">Deployment 03 · Larsen &amp; Toubro</span>
+          <h3>The Forex Risk Model</h3>
+          <div class="stars" aria-label="impact rating 4 of 5">★★★★☆ <span class="stars-n">range &amp; speed</span></div>
+          <p class="stay-blurb">A deep-learning forex model the treasury team could trust — built and benchmarked in six weeks.</p>
+          <div class="amenities"><span>91% accuracy</span><span>benchmarking</span><span>exec comms</span></div>
+        </div>
+        <div class="stay-price"><span class="price-k">outcome</span><span class="price-v">6 weeks</span><span class="price-cta">view stay →</span></div>
+      </button>
+      <div class="stay-body">
+        <div class="spine">
+          <div class="spine-row"><span class="spine-k">In short</span><p>A forex prediction model at 91% accuracy in six weeks, three architectures benchmarked against statistical baselines, a news-sentiment feature added, and recommendations presented to senior risk leadership.</p></div>
+          <div class="spine-row"><span class="spine-k">Taught</span><p>Benchmark before you commit, and translate a technical call for the people who own the decision. Most of a PM's job.</p></div>
+        </div>
+        <aside class="connect-note">
+          <span class="connect-mark">▸ Why this matters to a Connect property</span>
+          <p>Weighing options before committing, and translating a technical recommendation for non-technical decision-makers — the bridge a PM stands on.</p>
+        </aside>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ==================== PLAYBOOK (how I think) ==================== -->
+<section class="view" id="playbook" aria-label="Playbook" hidden>
+  <div class="wrap">
+    <p class="kicker">Playbook · the house rules</p>
+    <h2 class="page-h2">Claims, each with a receipt.</h2>
+    <p class="section-intro">Not frameworks I read about — principles I paid for. Every one is two clicks from proof.</p>
+    <div class="principles">
+      <div class="principle reveal"><span class="principle-n">01</span><h3>Subtract first.</h3><p>Most "we need a feature" problems are "we have too many steps" problems wearing a costume.</p><a class="principle-link" href="#stays">Seen in: the PolicyBazaar funnel, the 3× DAU lift</a></div>
+      <div class="principle reveal"><span class="principle-n">02</span><h3>Decide the question before the answer.</h3><p>A PM is remembered for the question they framed. Model-vs-friction. Training-vs-tooling. Get it right and the work narrows itself.</p><a class="principle-link" href="#stays">Seen in: every deployment</a></div>
+      <div class="principle reveal"><span class="principle-n">03</span><h3>Build-vs-buy is a business case, not a tech opinion.</h3><p>The hard part is never whether you <em>can</em> build it. It's whether the economics say you should.</p><a class="principle-link" href="#stays">Seen in: the ₹6 Mn/yr vendor call</a></div>
+      <div class="principle reveal"><span class="principle-n">04</span><h3>Tools live or die on adoption.</h3><p>A feature nobody switches to is a cost, not a product.</p><a class="principle-link" href="#stays">Seen in: the Crisil QA product</a></div>
+      <div class="principle reveal"><span class="principle-n">05</span><h3>Instrument the "why," not just the "what."</h3><p>A north-star without input metrics tells you the score but never the play.</p><a class="principle-link" href="#console">Seen in: the Console, and the 95% reporting cut</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CONNECT CONSOLE (partner dashboard) ==================== -->
+<section class="view view-console" id="console" aria-label="Connect Console" hidden>
+  <div class="wrap">
+    <p class="kicker kicker-sky">Connect Console · a concept</p>
+    <h2 class="page-h2 h2-light">The partner dashboard I'd want to build.</h2>
+    <p class="console-disclaimer">
+      A sketch, not real data. This is the supply-side surface a hotel partner logs into — and the
+      view I'd use to find where activation leaks. The thinking behind it lives in <a href="#coldstart">Cold Start</a>.
+      Sample property: <b>The Coorg Homestead</b>, 18 rooms, first 30 days on the platform.
+    </p>
+
+    <div class="dash">
+      <div class="dash-card gauge-card">
+        <span class="dash-label">Partner Health Score</span>
+        <div class="gauge"><svg viewBox="0 0 120 70"><path d="M10 65 A50 50 0 0 1 110 65" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="10" stroke-linecap="round"/><path id="gaugeArc" d="M10 65 A50 50 0 0 1 110 65" fill="none" stroke="var(--horizon)" stroke-width="10" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="157"/></svg><span class="gauge-num" data-count="68" data-suffix="">0</span></div>
+        <span class="dash-foot">Healthy · trending up. Driven mostly by go-live speed.</span>
+      </div>
+      <div class="dash-card">
+        <span class="dash-label">Time to first live listing</span>
+        <span class="dash-big" data-count="6" data-suffix=" days">0</span>
+        <span class="dash-foot down">↓ the metric I'd attack first</span>
+      </div>
+      <div class="dash-card">
+        <span class="dash-label">Go-live rate · signed → live</span>
+        <span class="dash-big" data-count="74" data-suffix="%">0</span>
+        <span class="dash-foot">the leak that matters most</span>
+      </div>
+      <div class="dash-card chart-card">
+        <span class="dash-label">Bookings · last 7 days</span>
+        <div class="bars"><span style="--h:30%"></span><span style="--h:45%"></span><span style="--h:38%"></span><span style="--h:62%"></span><span style="--h:55%"></span><span style="--h:80%"></span><span style="--h:72%"></span></div>
+        <span class="dash-foot">demand follows a complete, priced listing</span>
+      </div>
+      <div class="dash-card feed-card">
+        <span class="dash-label">Onboarding · go-live in one sitting</span>
+        <ul class="feed">
+          <li class="done">✓ Property profile created</li>
+          <li class="done">✓ Rooms &amp; rates added</li>
+          <li class="done">✓ Photos uploaded</li>
+          <li class="now">→ Availability synced <span class="feed-tag">last step</span></li>
+          <li class="next">First booking</li>
+        </ul>
+      </div>
+      <div class="dash-card market-card">
+        <span class="dash-label">Marketplace · two-sided</span>
+        <div class="two-sided">
+          <div class="side"><span class="side-k">Demand</span><span class="side-v">searching</span></div>
+          <div class="side-link">⇄</div>
+          <div class="side"><span class="side-k">Supply</span><span class="side-v">this listing</span></div>
+        </div>
+        <span class="dash-foot">liquidity in the long tail is the moat</span>
+      </div>
+    </div>
+    <a class="page-next" href="#coldstart">The note behind this dashboard →</a>
+  </div>
+</section>
+
+<!-- ==================== COLD START (kept, restyled) ==================== -->
+<section class="view" id="coldstart" aria-label="Cold Start" hidden>
+  <div class="wrap">
+    <p class="kicker">The note nobody asked me to write</p>
+    <h2 class="page-h2 cold-title">Cold Start</h2>
+    <p class="cold-sub">A partner's first 30 days, and the activation problem I'd want to own at Connect.</p>
+    <div class="cold-disclaimer">A note, not a pitch. I don't have Connect's data, so nothing here is a conclusion — it's a hypothesis, written the way I'd write one on my first day, to show how I'd think before I'd earned the right to an opinion.</div>
+
+    <div class="cold-section"><span class="cold-n">1</span><h3>The problem I'd look at first</h3><p>Getting a hotel to sign isn't the win. A listing that's <em>live, sellable, and priced right</em> is the win. Everything between the signature and that first confirmed booking is a funnel — and like every funnel I've worked on, I'd bet it leaks in places nobody expects.</p></div>
+    <div class="cold-section"><span class="cold-n">2</span><h3>Who hurts — and why it's a marketplace problem</h3>
+      <div class="hurts">
+        <div class="hurt" data-hurt><span class="hurt-k">The independent property</span><p>18 rooms, no revenue manager, first time online. Wants heads in beds, not a console — and has a front desk to run.</p></div>
+        <div class="hurt" data-hurt><span class="hurt-k">The marketplace</span><p>Liquidity in the long tail is the moat. A signed partner who never goes live is dead liquidity — growth on a slide, nothing in the pool a traveler searches.</p></div>
+        <div class="hurt" data-hurt><span class="hurt-k">The traveler</span><p>Sees thinner supply and worse prices in exactly the long-tail segment the platform should win.</p></div>
+      </div>
+    </div>
+    <div class="cold-section"><span class="cold-n">3</span><h3>The hypothesis</h3><p>Most first-30-day drop-off isn't unwilling partners. It's a setup process that asks for too much before the partner has felt a single rupee of value. <span class="aside-inline">(At PolicyBazaar, the funnel leaked for the same reason — we asked buyers for too much, too early.)</span></p></div>
+    <div class="cold-section"><span class="cold-n">4</span><h3>What I'd instrument before touching anything</h3>
+      <ul class="metric-list"><li>Time-to-first-live-listing</li><li>Time-to-first-booking</li><li>% of signed partners who never go live <span class="muted">— the leak that matters most</span></li><li>Setup-funnel drop-off, step by step</li><li>Parity &amp; availability completeness at go-live</li></ul>
+      <p class="cold-foot">You don't fix a funnel you haven't measured.</p>
+    </div>
+    <div class="cold-section"><span class="cold-n">5</span><h3>The first thing I'd try — narrow, on purpose</h3><p>Not a redesign. A "go-live in one sitting" path: the minimum that makes a listing sellable <em>today</em>, everything optional pushed to after the first booking. Ship to one segment, one city. Watch the go-live rate.</p></div>
+    <div class="cold-section"><span class="cold-n">6</span><h3>How I'd know it worked — and when I'd kill it</h3><p><b>Win:</b> time-to-first-live-listing down, go-live rate up, no rise in thin or parity-broken listings. <b>Kill:</b> if faster setup just produces listings nobody books. Fast onboarding that creates dead inventory is worse than slow onboarding that creates good inventory.</p></div>
+    <div class="cold-section"><span class="cold-n">7</span><h3>What I'm probably wrong about</h3><p>Maybe the bottleneck is human — the field team, not the tool. Maybe go-live isn't the constraint; <em>quality</em> at go-live is. Maybe chains matter more than the long tail right now. I'd want the data before I'd defend any of this. But this is the shape of how I'd start.</p></div>
+
+    <div class="cold-tieback">Same problem I solved at PolicyBazaar, in a different costume: find where intent dies, subtract before you add, instrument the why. <a href="#stays">→ The Activation Engine</a></div>
+  </div>
+</section>
+
+<!-- ==================== FIELD NOTES ==================== -->
+<section class="view" id="notes" aria-label="Field Notes" hidden>
+  <div class="wrap">
+    <p class="kicker">Field Notes · from the window seat</p>
+    <h2 class="page-h2">Things I think about, written down.</h2>
+    <p class="section-intro">Short notes on marketplaces, trust, and supply. Three, written properly, instead of twelve written thin.</p>
+    <div class="notes-list">
+      <article class="note reveal" data-note>
+        <button class="note-head" aria-expanded="false"><div><h3>The cold-start problem nobody booked a room for</h3><span class="note-meta">on two-sided liquidity · ~3 min</span></div><span class="note-toggle">+</span></button>
+        <div class="note-body">
+          <p>Two-sided marketplaces are weakest the day they open. Buyers won't come without supply; supply won't stay without buyers. Everyone knows this in the abstract and underestimates it in the specific — because cold start isn't one problem, it's a new one in every city, every category, every segment of the long tail.</p>
+          <p>Insurance taught me you don't solve it by being clever on both sides at once. You pick the side that's cheaper to seed and over-invest there until the other has a reason to show up. At PolicyBazaar the scarce side wasn't demand — people wanted insurance — it was <em>completed intent</em>. So we stopped chasing more starts and removed reasons to abandon. The marketplace version is supply you can actually sell: not more listings, but more live, priced, bookable ones where travelers already search.</p>
+          <p>The trap is treating a sign-up as liquidity. A signed partner who never goes live adds nothing to the pool a traveler searches. It looks like growth on a slide and behaves like a dead listing in the funnel.</p>
+        </div>
+      </article>
+      <article class="note reveal" data-note>
+        <button class="note-head" aria-expanded="false"><div><h3>Trust is a feature you can't ship once</h3><span class="note-meta">on marketplace trust · ~3 min</span></div><span class="note-toggle">+</span></button>
+        <div class="note-body">
+          <p>A marketplace asks two strangers to transact on its word. The traveler trusts the room exists, the photos are honest, the price won't move. The partner trusts the booking is real, the payout will come, the platform won't quietly compete with them. None of that trust is natural. All of it is manufactured — reviews, ratings, guarantees, verified badges, payout reliability. Trust is the product; rooms are just inventory.</p>
+          <p>And trust decays. A review system that worked last year gets gamed this year. You maintain it like infrastructure, against constant pressure from people trying to exploit it.</p>
+          <p>I learned a small version building a support model people had to believe. Accuracy got us in the room; what kept users was the model knowing when <em>not</em> to answer. A confident wrong answer cost more trust than ten honest "I'm not sure"s.</p>
+        </div>
+      </article>
+      <article class="note reveal" data-note>
+        <button class="note-head" aria-expanded="false"><div><h3>Activation is the metric everyone skips</h3><span class="note-meta">on sign-up vs value · ~2 min</span></div><span class="note-toggle">+</span></button>
+        <div class="note-body">
+          <p>Acquisition is loud and retention is fashionable, so activation — the unglamorous middle — gets skipped. Which is strange, because it's usually where the value leaks. The sign-up isn't the win. The first time the user feels what they came for is the win, and everything between is a funnel nobody instrumented.</p>
+          <p>For a buyer, activation is the first purchase. For a hotel partner, it's the first live, sellable listing — better, the first confirmed booking. A platform that counts sign-ups measures a promise. One that counts time-to-first-value measures whether the promise was kept.</p>
+          <p><a href="#coldstart">→ Read Cold Start</a></p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CHECK-IN (contact) ==================== -->
+<section class="view view-confirm" id="contact" aria-label="Check-in" hidden>
+  <div class="wrap">
+    <div class="confirm-card">
+      <div class="confirm-top"><span>✓ READY TO BOARD</span><span>confirmation</span></div>
+      <h2 class="confirm-h">Let's talk about the supply side.</h2>
+      <p class="confirm-lede">I'm looking for product work where the real problem lives behind the experience, not on top of it. Hotels Connect is one of the few roles that's <em>only</em> that — a marketplace's supply side, full-time. If that's the room, I'd like to be in it.</p>
+      <div class="confirm-grid">
+        <div><span class="cg-k">Passenger</span><span class="cg-v">Puneet Madhav</span></div>
+        <div><span class="cg-k">Destination</span><span class="cg-v">Hotels Connect</span></div>
+        <div><span class="cg-k">Status</span><span class="cg-v">open to the right room</span></div>
+      </div>
+      <div class="confirm-actions">
+        <a class="btn-primary" href="mailto:pmadhav204@gmail.com">pmadhav204@gmail.com</a>
+        <a class="btn-ghost" href="https://www.linkedin.com/in/puneetmadhav" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn-ghost" href="assets/Puneet-Madhav-Resume.pdf" target="_blank" rel="noopener">↧ résumé</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER (easter-egg trigger) ============ -->
+<footer class="footer">
+  <span>Puneet Madhav · built, not templated</span>
+  <button class="version-tag" id="versionTag" title="press g then p">Behind the Booking · v2.0</button>
+</footer>
+
+<!-- mobile sticky cta injected by JS -->
+
+<!-- ============ PRD MODAL (easter egg) ============ -->
+<div class="modal-overlay" id="prdModal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="prdTitle">
+    <button class="modal-close" id="prdClose" aria-label="Close">×</button>
+    <span class="modal-tag">found it · welcome to the cockpit</span>
+    <h2 id="prdTitle">PRD v2.0 — This Website</h2>
+    <dl class="prd">
+      <dt>Problem</dt><dd>A hiring manager at Connect has 500 tabs open and 40 seconds for mine.</dd>
+      <dt>Target user</dt><dd>You. The person deciding whether this conversation is worth having.</dd>
+      <dt>North-star</dt><dd>Not time-on-site, not scroll depth. A reply. Everything else is vanity.</dd>
+      <dt>In scope</dt><dd>Make a travel person feel I get the category, and a Director see the thinking is real.</dd>
+      <dt>Out of scope</dt><dd>Convincing you I've worked in travel. I haven't. I'm betting the instinct transfers — and I built <em>Cold Start</em> to show my work.</dd>
+      <dt>Non-goals</dt><dd>Cloning MakeMyTrip's UI. Borrowing its mental models, not its CSS.</dd>
+      <dt>v3 backlog</dt><dd>Swap the Console's sample data for Connect's real numbers. A/B test this headline. Add a partner-churn teardown.</dd>
+    </dl>
+    <p class="prd-status">status: shipped. now reading its own analytics, like a good PM.</p>
+  </div>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
